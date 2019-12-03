@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="100dp"
+    tools:context=".ui.main.SelectWaterTypeFragment">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:minWidth="250dp"
+        android:onClick="inputWaterButtonClick"
+        android:padding="25dp"
+        android:text="Input Water"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/outputWaterButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="250dp"
+        android:onClick="outputWaterButtonClick"
+        android:padding="25dp"
+        android:text="Output Water"
+        android:textSize="18sp" />
+</LinearLayout>
