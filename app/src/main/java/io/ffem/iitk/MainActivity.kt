@@ -11,22 +11,23 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import io.ffem.iitk.ui.main.MainFragment
 import io.ffem.iitk.ui.main.ResultFragment
+import io.ffem.iitk.ui.main.TreatmentType
 import io.ffem.iitk.ui.main.TreatmentTypeFragment
 import org.json.JSONException
 
 const val TEST_ID_KEY = "testId"
 const val RESULT_JSON = "resultJson"
 const val EXTERNAL_REQUEST = 1
+const val TREATMENT_TYPE = "treatmentType"
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var treatmentType: TreatmentType
+
     override fun setTitle(titleId: Int) {
         super.setTitle(titleId)
-
         findViewById<TextView>(R.id.appBarTitle).text = title
     }
-
-    private var externalAppAction: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,15 +39,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun launchTest() {
-
-        externalAppAction = "io.ffem.water"
+    private fun launchTest(type: TreatmentType) {
+        val externalAppAction = "io.ffem.water"
         val testId = "d488672f-9a4c-4aa4-82eb-8a95c40d0296"
+        treatmentType = type
 
         val data = Bundle()
         try {
             data.putString(TEST_ID_KEY, testId)
             data.putBoolean("debugMode", true)
+            data.putString(TREATMENT_TYPE, treatmentType.toString())
             val intent = Intent(externalAppAction)
             intent.putExtras(data)
             startActivityForResult(intent, EXTERNAL_REQUEST)
@@ -75,7 +77,10 @@ class MainActivity : AppCompatActivity() {
                         FragmentManager.POP_BACK_STACK_INCLUSIVE
                     )
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, ResultFragment.newInstance(jsonString, ""))
+                        .replace(
+                            R.id.container,
+                            ResultFragment.newInstance(jsonString, treatmentType)
+                        )
                         .commitNow()
 
                 }
@@ -97,15 +102,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun outputWaterButtonClick(@Suppress("UNUSED_PARAMETER") view: View) {
-        launchTest()
+        launchTest(TreatmentType.NONE)
     }
 
     fun ironSulphateButtonClick(@Suppress("UNUSED_PARAMETER") view: View) {
-        launchTest()
+        launchTest(TreatmentType.IRON_SULPHATE)
     }
 
     fun electrocoagulationButtonClick(@Suppress("UNUSED_PARAMETER") view: View) {
-        launchTest()
+        launchTest(TreatmentType.ELECTROCOAGULATION)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

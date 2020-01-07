@@ -81,13 +81,26 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/recommendation1Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:lineSpacingExtra="5dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textAlignment="textStart"
+            android:textSize="16sp"
+            tools:text="The weight of FeSO4.7H2O salt in one tablet is 200 mg." />
+
+        <TextView
+            android:id="@+id/recommendation2Text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:lineSpacingExtra="5dp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:text="The weight of FeSO4.7H2O salt in one tablet is 200 mg. It can treat 6 L of water contaminated with 2 mg/L of Cr(VI)."
             android:textAlignment="textStart"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            tools:text="A tablet can treat 6 L of water contaminated with 2 mg/L of Cr(VI)." />
     </LinearLayout>
 </RelativeLayout>

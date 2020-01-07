@@ -5,15 +5,15 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.INVISIBLE
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import io.ffem.iitk.R
+import kotlinx.android.synthetic.main.fragment_result.*
 import org.json.JSONObject
 
-// TODO: Rename parameter arguments, choose names that match
-private const val ARG_RESULT_JSON = "result_json"
-private const val ARG_PARAM2 = "param2"
+private const val ARG_RESULT_JSON = "resultJson"
+private const val ARG_TREATMENT_TYPE = "treatmentType"
 
 /**
  * A simple [Fragment] subclass.
@@ -24,16 +24,44 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class ResultFragment : Fragment() {
-    // TODO: Rename and change types of parameters
     private lateinit var resultJson: String
-    private var param2: String? = null
+    private lateinit var treatmentType: TreatmentType
     private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             resultJson = it.getString(ARG_RESULT_JSON).toString()
-            param2 = it.getString(ARG_PARAM2)
+            treatmentType = TreatmentType.valueOf(it.getString(ARG_TREATMENT_TYPE).toString())
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val result = JSONObject(resultJson).getJSONArray("result")
+        val value = result.getJSONObject(0).getString("value")
+        val name = result.getJSONObject(0).getString("name")
+
+        activity?.setTitle(R.string.result)
+
+        textResult.text = value
+        textTitle.text = name
+
+        when (treatmentType) {
+            TreatmentType.NONE -> {
+                infoLayout.visibility = INVISIBLE
+            }
+            TreatmentType.IRON_SULPHATE -> {
+                recommendation1Text.text = "The weight of FeSO4.7H2O salt in one tablet is 200 mg."
+                recommendation2Text.text =
+                    "A tablet can treat 6L of water contaminated with 2 mg/L of Cr(VI)."
+            }
+            TreatmentType.ELECTROCOAGULATION -> {
+                recommendation1Text.text =
+                    "A current of 40 mA needs 2 hours to treat 6L of water contaminated with 2 mg/L of Cr(VI)."
+                recommendation2Text.visibility = INVISIBLE
+            }
         }
     }
 
@@ -42,15 +70,7 @@ class ResultFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_result, container, false)
-
-        val result = JSONObject(resultJson).getJSONArray("result")
-        val value = result.getJSONObject(0).getString("value")
-
-        activity?.setTitle(R.string.result)
-
-        view.findViewById<TextView>(R.id.textResult).text = value
-        return view
+        return inflater.inflate(R.layout.fragment_result, container, false)
     }
 
     override fun onAttach(context: Context) {
@@ -84,21 +104,12 @@ class ResultFragment : Fragment() {
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ResultFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(resultJson: String, treatmentType: TreatmentType) =
             ResultFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_RESULT_JSON, param1)
-                    putString(ARG_PARAM2, param2)
+                    putString(ARG_RESULT_JSON, resultJson)
+                    putString(ARG_TREATMENT_TYPE, treatmentType.toString())
                 }
             }
     }
