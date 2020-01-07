@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">IITK-CrVI</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
 
     <string name="select_water_type">Select water type</string>
     <string name="select_treatment_type">Select treatment type</string>
+
+    <string name="result">Result</string>
+    <string name="input_water">Input Water</string>
+    <string name="output_water">Output Water</string>
+    <string name="recommendation">Recommendation</string>
+    <string name="iron_sulphate">Iron Sulphate</string>
+    <string name="electrocoagulation">Electrocoagulation</string>
 </resources>

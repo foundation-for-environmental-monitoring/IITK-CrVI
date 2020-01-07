@@ -15,7 +15,7 @@
         android:minWidth="250dp"
         android:onClick="ironSulphateButtonClick"
         android:padding="25dp"
-        android:text="Iron Sulphate"
+        android:text="@string/iron_sulphate"
         android:textSize="18sp" />
 
     <Button
@@ -25,6 +25,6 @@
         android:minWidth="250dp"
         android:onClick="electrocoagulationButtonClick"
         android:padding="25dp"
-        android:text="Electrocoagulation"
+        android:text="@string/electrocoagulation"
         android:textSize="18sp" />
 </LinearLayout>

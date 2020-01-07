@@ -41,12 +41,11 @@ class TreatmentTypeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_treatment_type, container, false)
-    }
+        val view = inflater.inflate(R.layout.fragment_treatment_type, container, false)
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
+        activity?.setTitle(R.string.select_treatment_type)
+
+        return view
     }
 
     override fun onAttach(context: Context) {
