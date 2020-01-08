@@ -53,9 +53,9 @@ class ResultFragment : Fragment() {
                 infoLayout.visibility = INVISIBLE
             }
             TreatmentType.IRON_SULPHATE -> {
-                recommendation1Text.text = "The weight of FeSO4.7H2O salt in one tablet is 200 mg."
+                recommendation1Text.text = "Recommendation information 1"
                 recommendation2Text.text =
-                    "A tablet can treat 6L of water contaminated with 2 mg/L of Cr(VI)."
+                    "Recommendation informatjon 2"
             }
             TreatmentType.ELECTROCOAGULATION -> {
                 recommendation1Text.text =

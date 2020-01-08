@@ -4,15 +4,14 @@ import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
-import io.ffem.iitk.ui.main.MainFragment
-import io.ffem.iitk.ui.main.ResultFragment
-import io.ffem.iitk.ui.main.TreatmentType
-import io.ffem.iitk.ui.main.TreatmentTypeFragment
+import io.ffem.iitk.ui.main.*
+import io.ffem.iitk.ui.main.dummy.DummyContent
 import org.json.JSONException
 
 const val TEST_ID_KEY = "testId"
@@ -20,7 +19,7 @@ const val RESULT_JSON = "resultJson"
 const val EXTERNAL_REQUEST = 1
 const val TREATMENT_TYPE = "treatmentType"
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ItemFragment.OnListFragmentInteractionListener {
 
     private lateinit var treatmentType: TreatmentType
 
@@ -96,7 +95,7 @@ class MainActivity : AppCompatActivity() {
                 R.anim.slide_in_left, R.anim.slide_out_left,
                 R.anim.slide_in_right, R.anim.slide_out_right
             )
-            .replace(R.id.container, TreatmentTypeFragment.newInstance("", ""))
+            .replace(R.id.container, ItemFragment.newInstance(1))
             .addToBackStack(null)
             .commit()
     }
@@ -106,11 +105,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun ironSulphateButtonClick(@Suppress("UNUSED_PARAMETER") view: View) {
-        launchTest(TreatmentType.IRON_SULPHATE)
+        showInstruction(TreatmentType.IRON_SULPHATE)
+    }
+
+    private fun showInstruction(treatmentType: TreatmentType) {
+        supportFragmentManager.beginTransaction()
+            .setCustomAnimations(
+                R.anim.slide_in_left, R.anim.slide_out_left,
+                R.anim.slide_in_right, R.anim.slide_out_right
+            )
+            .replace(R.id.container, InstructionFragment.newInstance("", ""))
+            .addToBackStack(null)
+            .commit()
     }
 
     fun electrocoagulationButtonClick(@Suppress("UNUSED_PARAMETER") view: View) {
-        launchTest(TreatmentType.ELECTROCOAGULATION)
+        showInstruction(TreatmentType.ELECTROCOAGULATION)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -119,5 +129,17 @@ class MainActivity : AppCompatActivity() {
             return true
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun startClick(@Suppress("UNUSED_PARAMETER") view: View) {
+        launchTest(TreatmentType.IRON_SULPHATE)
+    }
+
+    override fun onListFragmentInteraction(item: DummyContent.DummyItem?) {
+        Handler().postDelayed(
+            {
+                showInstruction(TreatmentType.ELECTROCOAGULATION)
+            }, 350
+        )
     }
 }

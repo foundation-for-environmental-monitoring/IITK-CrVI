@@ -10,4 +10,5 @@
     <string name="recommendation">Recommendation</string>
     <string name="iron_sulphate">Iron Sulphate</string>
     <string name="electrocoagulation">Electrocoagulation</string>
+    <string name="instructions">Instructions</string>
 </resources>
