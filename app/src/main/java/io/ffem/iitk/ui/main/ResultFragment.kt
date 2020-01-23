@@ -41,6 +41,7 @@ class ResultFragment : Fragment() {
 
         val result = JSONObject(resultJson).getJSONArray("result")
         val value = result.getJSONObject(0).getString("value")
+            .replace("> >", ">")
         val name = result.getJSONObject(0).getString("name")
 
         activity?.setTitle(R.string.result)

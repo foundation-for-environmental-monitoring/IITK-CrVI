@@ -2,22 +2,27 @@ package io.ffem.iitk
 
 import android.app.Activity
 import android.content.ActivityNotFoundException
+import android.content.DialogInterface
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import io.ffem.iitk.ui.main.*
 import io.ffem.iitk.ui.main.dummy.DummyContent
 import org.json.JSONException
+import java.util.*
 
 const val TEST_ID_KEY = "testId"
 const val RESULT_JSON = "resultJson"
 const val EXTERNAL_REQUEST = 1
 const val TREATMENT_TYPE = "treatmentType"
+const val PLAY_STORE_URL = "https://play.google.com/store/apps/details?id="
 
 class MainActivity : AppCompatActivity(), ItemFragment.OnListFragmentInteractionListener {
 
@@ -39,6 +44,7 @@ class MainActivity : AppCompatActivity(), ItemFragment.OnListFragmentInteraction
     }
 
     private fun launchTest(type: TreatmentType) {
+        val appTitle = "ffem Water"
         val externalAppAction = "io.ffem.water"
         val testId = "d488672f-9a4c-4aa4-82eb-8a95c40d0296"
         treatmentType = type
@@ -51,8 +57,23 @@ class MainActivity : AppCompatActivity(), ItemFragment.OnListFragmentInteraction
             val intent = Intent(externalAppAction)
             intent.putExtras(data)
             startActivityForResult(intent, EXTERNAL_REQUEST)
-
         } catch (e: ActivityNotFoundException) {
+            val builder = AlertDialog.Builder(this, R.style.Theme_AppCompat_Light_Dialog)
+            builder.setTitle(R.string.app_not_found)
+                .setMessage(String.format(Locale.US, getString(R.string.install_app), appTitle))
+                .setPositiveButton(R.string.go_to_play_store) { _: DialogInterface?, _: Int ->
+                    startActivity(
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse(PLAY_STORE_URL + externalAppAction)
+                        )
+                    )
+                }
+                .setNegativeButton(
+                    android.R.string.cancel
+                ) { dialogInterface: DialogInterface, _: Int -> dialogInterface.dismiss() }
+                .setCancelable(false)
+                .show()
         }
     }
 
