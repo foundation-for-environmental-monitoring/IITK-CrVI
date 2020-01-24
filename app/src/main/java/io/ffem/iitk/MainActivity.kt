@@ -12,6 +12,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentManager
 import io.ffem.iitk.ui.main.*
 import io.ffem.iitk.ui.main.dummy.DummyContent
@@ -40,6 +41,21 @@ class MainActivity : AppCompatActivity(), ItemFragment.OnListFragmentInteraction
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, MainFragment.newInstance())
                 .commitNow()
+        }
+    }
+
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        super.onPostCreate(savedInstanceState)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        if (toolbar != null) {
+            try {
+                setSupportActionBar(toolbar)
+            } catch (ignored: Exception) { // do nothing
+            }
+        }
+        if (supportActionBar != null) {
+            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+            supportActionBar!!.title = ""
         }
     }
 
