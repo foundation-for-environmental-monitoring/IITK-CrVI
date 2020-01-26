@@ -5,13 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.ffem.iitk.R
-import io.ffem.iitk.ui.main.dummy.DummyContent
-import io.ffem.iitk.ui.main.dummy.DummyContent.DummyItem
+import io.ffem.iitk.ui.main.model.Treatments
+import io.ffem.iitk.ui.main.model.Treatments.TreatmentItem
 
 /**
  * A fragment representing a list of Items.
@@ -20,7 +21,6 @@ import io.ffem.iitk.ui.main.dummy.DummyContent.DummyItem
  */
 class ItemFragment : Fragment() {
 
-    // TODO: Customize parameters
     private var columnCount = 1
 
     private var listener: OnListFragmentInteractionListener? = null
@@ -51,7 +51,7 @@ class ItemFragment : Fragment() {
                     )
                 )
 
-                adapter = MyItemRecyclerViewAdapter(DummyContent.ITEMS, listener)
+                adapter = TreatmentItemRecyclerViewAdapter(Treatments.ITEMS, listener)
             }
         }
         return view
@@ -60,6 +60,9 @@ class ItemFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity?.setTitle(R.string.select_treatment_type)
+        if ((activity as AppCompatActivity).supportActionBar != null) {
+            (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        }
     }
 
     override fun onAttach(context: Context) {
@@ -67,7 +70,7 @@ class ItemFragment : Fragment() {
         if (context is OnListFragmentInteractionListener) {
             listener = context
         } else {
-//            throw RuntimeException("$context must implement OnListFragmentInteractionListener")
+            throw RuntimeException("$context must implement OnListFragmentInteractionListener")
         }
     }
 
@@ -76,28 +79,14 @@ class ItemFragment : Fragment() {
         listener = null
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson
-     * [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
     interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onListFragmentInteraction(item: DummyItem?)
+        fun onListFragmentInteraction(item: TreatmentItem?)
     }
 
     companion object {
 
-        // TODO: Customize parameter argument names
         const val ARG_COLUMN_COUNT = "column-count"
 
-        // TODO: Customize parameter initialization
         @JvmStatic
         fun newInstance(columnCount: Int) =
             ItemFragment().apply {

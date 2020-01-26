@@ -24,8 +24,20 @@
             android:paddingStart="@dimen/activity_horizontal_margin"
             android:paddingEnd="@dimen/activity_horizontal_margin"
             android:paddingBottom="3dp"
+            android:textColor="#333"
             android:textSize="32sp"
             tools:text="Fluoride" />
+
+        <TextView
+            android:id="@+id/textSubtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:paddingBottom="3dp"
+            android:textSize="20sp"
+            tools:text="Electrocoagulation" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -75,7 +87,7 @@
             android:layout_marginBottom="20dp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:text="@string/recommendation"
+            android:text="@string/treatment"
             android:textAlignment="center"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -100,7 +112,8 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:textAlignment="textStart"
-            android:textSize="16sp"
-            tools:text="A tablet can treat 6 L of water contaminated with 2 mg/L of Cr(VI)." />
+            android:textColor="#888"
+            android:textSize="13sp"
+            tools:text="Each tablet..." />
     </LinearLayout>
 </RelativeLayout>

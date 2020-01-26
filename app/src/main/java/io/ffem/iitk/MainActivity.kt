@@ -14,8 +14,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentManager
-import io.ffem.iitk.ui.main.*
-import io.ffem.iitk.ui.main.dummy.DummyContent
+import io.ffem.iitk.ui.main.ItemFragment
+import io.ffem.iitk.ui.main.MainFragment
+import io.ffem.iitk.ui.main.ResultFragment
+import io.ffem.iitk.ui.main.TreatmentType
+import io.ffem.iitk.ui.main.model.Treatments
 import org.json.JSONException
 import java.util.*
 
@@ -54,7 +57,7 @@ class MainActivity : AppCompatActivity(), ItemFragment.OnListFragmentInteraction
             }
         }
         if (supportActionBar != null) {
-            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+            supportActionBar!!.setDisplayHomeAsUpEnabled(false)
             supportActionBar!!.title = ""
         }
     }
@@ -128,10 +131,6 @@ class MainActivity : AppCompatActivity(), ItemFragment.OnListFragmentInteraction
 
     fun inputWaterButtonClick(@Suppress("UNUSED_PARAMETER") view: View) {
         supportFragmentManager.beginTransaction()
-            .setCustomAnimations(
-                R.anim.slide_in_left, R.anim.slide_out_left,
-                R.anim.slide_in_right, R.anim.slide_out_right
-            )
             .replace(R.id.container, ItemFragment.newInstance(1))
             .addToBackStack(null)
             .commit()
@@ -139,25 +138,6 @@ class MainActivity : AppCompatActivity(), ItemFragment.OnListFragmentInteraction
 
     fun outputWaterButtonClick(@Suppress("UNUSED_PARAMETER") view: View) {
         launchTest(TreatmentType.NONE)
-    }
-
-    fun ironSulphateButtonClick(@Suppress("UNUSED_PARAMETER") view: View) {
-        showInstruction(TreatmentType.IRON_SULPHATE)
-    }
-
-    private fun showInstruction(treatmentType: TreatmentType) {
-        supportFragmentManager.beginTransaction()
-            .setCustomAnimations(
-                R.anim.slide_in_left, R.anim.slide_out_left,
-                R.anim.slide_in_right, R.anim.slide_out_right
-            )
-            .replace(R.id.container, InstructionFragment.newInstance("", ""))
-            .addToBackStack(null)
-            .commit()
-    }
-
-    fun electrocoagulationButtonClick(@Suppress("UNUSED_PARAMETER") view: View) {
-        showInstruction(TreatmentType.ELECTROCOAGULATION)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -168,14 +148,10 @@ class MainActivity : AppCompatActivity(), ItemFragment.OnListFragmentInteraction
         return super.onOptionsItemSelected(item)
     }
 
-    fun startClick(@Suppress("UNUSED_PARAMETER") view: View) {
-        launchTest(TreatmentType.IRON_SULPHATE)
-    }
-
-    override fun onListFragmentInteraction(item: DummyContent.DummyItem?) {
+    override fun onListFragmentInteraction(item: Treatments.TreatmentItem?) {
         Handler().postDelayed(
             {
-                showInstruction(TreatmentType.ELECTROCOAGULATION)
+                launchTest(item!!.treatmentType)
             }, 350
         )
     }

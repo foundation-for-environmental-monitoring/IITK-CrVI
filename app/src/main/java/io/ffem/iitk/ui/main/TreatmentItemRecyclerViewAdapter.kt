@@ -8,24 +8,23 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import io.ffem.iitk.R
 import io.ffem.iitk.ui.main.ItemFragment.OnListFragmentInteractionListener
-import io.ffem.iitk.ui.main.dummy.DummyContent.DummyItem
+import io.ffem.iitk.ui.main.model.Treatments.TreatmentItem
 import kotlinx.android.synthetic.main.fragment_item.view.*
 
 /**
- * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
+ * [RecyclerView.Adapter] that can display a [TreatmentItem] and makes a call to the
  * specified [OnListFragmentInteractionListener].
- * TODO: Replace the implementation with code for your data type.
  */
-class MyItemRecyclerViewAdapter(
-    private val mValues: List<DummyItem>,
+class TreatmentItemRecyclerViewAdapter(
+    private val mValues: List<TreatmentItem>,
     private val mListener: OnListFragmentInteractionListener?
-) : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<TreatmentItemRecyclerViewAdapter.ViewHolder>() {
 
     private val mOnClickListener: View.OnClickListener
 
     init {
         mOnClickListener = View.OnClickListener { v ->
-            val item = v.tag as DummyItem
+            val item = v.tag as TreatmentItem
             // Notify the active callbacks interface (the activity, if the fragment is attached to
             // one) that an item has been selected.
             mListener?.onListFragmentInteraction(item)
@@ -40,7 +39,7 @@ class MyItemRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
-        holder.mContentView.text = item.content
+        holder.mContentView.text = item.toString()
 
         with(holder.mView) {
             tag = item
