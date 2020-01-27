@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.View.INVISIBLE
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -46,6 +47,7 @@ class ResultFragment : Fragment() {
         when (treatmentType) {
             TreatmentType.NONE -> {
                 infoLayout.visibility = INVISIBLE
+                textSubtitle.visibility = GONE
             }
             TreatmentType.IRON_SULPHATE -> {
                 textSubtitle.text = getString(R.string.iron_sulphate)
