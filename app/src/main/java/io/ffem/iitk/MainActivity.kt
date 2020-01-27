@@ -18,6 +18,7 @@ import io.ffem.iitk.ui.main.ItemFragment
 import io.ffem.iitk.ui.main.MainFragment
 import io.ffem.iitk.ui.main.ResultFragment
 import io.ffem.iitk.ui.main.TreatmentType
+import io.ffem.iitk.ui.main.helper.ApkHelper
 import io.ffem.iitk.ui.main.model.Treatments
 import org.json.JSONException
 import java.util.*
@@ -44,6 +45,13 @@ class MainActivity : AppCompatActivity(), ItemFragment.OnListFragmentInteraction
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, MainFragment.newInstance())
                 .commitNow()
+        }
+
+        try {
+            // If app has expired then close this activity
+            ApkHelper.isAppVersionExpired(this)
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 

@@ -17,4 +17,9 @@
     <string name="electrocoagulation_recommendation">A current of 40 mA needs 2 hours to treat 6L of water contaminated with 2 mg/L of Cr(VI).</string>
     <string name="iron_sulphate_recommendation">1 tablet treats 6L of water contaminated with 2 mg/L of Cr(VI).</string>
     <string name="note_based_on_200mg_tablet"><![CDATA[<b>Note</b>: Based on each tablet containing 200mg of FeSO4.7H2O salt.]]></string>
+
+    <string name="versionExpired">Version expired</string>
+    <string name="thisVersionHasExpired">This version of the app has expired.</string>
+    <string name="uninstallAndInstallFromStore">Please uninstall and then install the latest version from Play Store.</string>
+    <string name="ok">Ok</string>
 </resources>

@@ -1,8 +1,12 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+
+def secretsFile = file(System.properties['user.home'] + '/.gradle/gradle.properties')
+def secrets = new Properties()
+if (secretsFile.exists()) {
+    secrets.load(new FileInputStream(secretsFile))
+}
 
 android {
     compileSdkVersion 29
@@ -11,14 +15,44 @@ android {
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
+        versionName "Alpha 0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
+
+    signingConfigs {
         release {
+            if (secrets.getProperty('FFEM_RELEASE_STORE_FILE')) {
+                storeFile file(secrets.getProperty('FFEM_RELEASE_STORE_FILE'))
+                storePassword secrets.getProperty('FFEM_RELEASE_STORE_PASSWORD')
+                keyAlias secrets.getProperty('FFEM_RELEASE_KEY_ALIAS')
+                keyPassword secrets.getProperty('FFEM_RELEASE_KEY_PASSWORD')
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField "java.util.Date", "BUILD_TIME", "new java.util.Date(" + 0L + ")"
+        }
+        release {
+            if (secrets.getProperty('FFEM_RELEASE_STORE_FILE')) {
+                signingConfig signingConfigs.release
+            }
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            // Expiry date of apk. To prevent test builds from being used in production
+            buildConfigField "java.util.Date", "BUILD_TIME", "new java.util.Date(" +
+                    (System.currentTimeMillis()) + "L)"
+            android.applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "iitk-crvii-${variant.versionCode}.apk"
+                }
+            }
         }
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
     }
 }
 
