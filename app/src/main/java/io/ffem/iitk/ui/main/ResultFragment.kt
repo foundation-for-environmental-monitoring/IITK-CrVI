@@ -1,10 +1,8 @@
 package io.ffem.iitk.ui.main
 
 import android.os.Bundle
-import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
 import android.view.View.INVISIBLE
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -32,8 +30,9 @@ class ResultFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val result = JSONObject(resultJson).getJSONArray("result")
-        val value = result.getJSONObject(0).getString("value")
-            .replace("> >", ">")
+        var value = result.getJSONObject(0).getString("value")
+        value = value.replace("> ", "")
+        value = value.replace("> >", ">")
         val name = result.getJSONObject(0).getString("name")
 
         activity?.setTitle(R.string.result)
@@ -42,19 +41,17 @@ class ResultFragment : Fragment() {
         }
 
         textResult.text = value
-        textTitle.text = name
+        textTitle.text = "$name (VI)"
 
         when (treatmentType) {
             TreatmentType.NONE -> {
                 infoLayout.visibility = INVISIBLE
-                textSubtitle.visibility = GONE
+                textSubtitle.text = getString(R.string.output_water)
             }
             TreatmentType.IRON_SULPHATE -> {
                 textSubtitle.text = getString(R.string.iron_sulphate)
                 recommendation1Text.text =
                     getString(R.string.iron_sulphate_recommendation)
-                recommendation2Text.text =
-                    Html.fromHtml(getString(R.string.note_based_on_200mg_tablet))
             }
             TreatmentType.ELECTROCOAGULATION -> {
                 textSubtitle.text = getString(R.string.electrocoagulation)

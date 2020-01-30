@@ -38,7 +38,7 @@ public final class ApkHelper {
 
             final Calendar appExpiryDate = GregorianCalendar.getInstance();
             appExpiryDate.setTime(BuildConfig.BUILD_TIME);
-            appExpiryDate.add(Calendar.DAY_OF_YEAR, 15);
+            appExpiryDate.add(Calendar.DAY_OF_YEAR, 7);
 
             if ((new GregorianCalendar()).after(appExpiryDate)) {
 

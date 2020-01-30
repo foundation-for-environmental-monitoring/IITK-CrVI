@@ -16,7 +16,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentManager
 import io.ffem.iitk.ui.main.ItemFragment
 import io.ffem.iitk.ui.main.MainFragment
-import io.ffem.iitk.ui.main.ResultFragment
+import io.ffem.iitk.ui.main.ResultTreatmentFragment
 import io.ffem.iitk.ui.main.TreatmentType
 import io.ffem.iitk.ui.main.helper.ApkHelper
 import io.ffem.iitk.ui.main.model.Treatments
@@ -126,7 +126,7 @@ class MainActivity : AppCompatActivity(), ItemFragment.OnListFragmentInteraction
                     supportFragmentManager.beginTransaction()
                         .replace(
                             R.id.container,
-                            ResultFragment.newInstance(jsonString, treatmentType)
+                            ResultTreatmentFragment.newInstance(jsonString, treatmentType)
                         )
                         .commitNow()
 
@@ -138,10 +138,11 @@ class MainActivity : AppCompatActivity(), ItemFragment.OnListFragmentInteraction
     }
 
     fun inputWaterButtonClick(@Suppress("UNUSED_PARAMETER") view: View) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.container, ItemFragment.newInstance(1))
-            .addToBackStack(null)
-            .commit()
+        launchTest(TreatmentType.ELECTROCOAGULATION)
+//        supportFragmentManager.beginTransaction()
+//            .replace(R.id.container, InputFragment.newInstance("0","0"))
+//            .addToBackStack(null)
+//            .commit()
     }
 
     fun outputWaterButtonClick(@Suppress("UNUSED_PARAMETER") view: View) {
@@ -162,5 +163,9 @@ class MainActivity : AppCompatActivity(), ItemFragment.OnListFragmentInteraction
                 launchTest(item!!.treatmentType)
             }, 350
         )
+    }
+
+    fun startButtonClick(@Suppress("UNUSED_PARAMETER") view: View) {
+        launchTest(TreatmentType.ELECTROCOAGULATION)
     }
 }

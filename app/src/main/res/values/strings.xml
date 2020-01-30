@@ -14,12 +14,21 @@
     <string name="iron_sulphate">Iron Sulphate</string>
     <string name="electrocoagulation">Electrocoagulation</string>
     <string name="treatment">Treatment</string>
-    <string name="electrocoagulation_recommendation">A current of 40 mA needs 2 hours to treat 6L of water contaminated with 2 mg/L of Cr(VI).</string>
-    <string name="iron_sulphate_recommendation">1 tablet treats 6L of water contaminated with 2 mg/L of Cr(VI).</string>
-    <string name="note_based_on_200mg_tablet"><![CDATA[<b>Note</b>: Based on each tablet containing 200mg of FeSO4.7H2O salt.]]></string>
+    <string name="electrocoagulation_recommendation"><![CDATA[Allow treatment time of <b>%s</b> with 40 mA of current for  <b>%d L</b> of water]]></string>
+    <string name="iron_sulphate_recommendation"><![CDATA[Add <b>%s</b> of FeSO4 salt to <b>%d L</b> of water]]></string>
 
     <string name="versionExpired">Version expired</string>
     <string name="thisVersionHasExpired">This version of the app has expired.</string>
     <string name="uninstallAndInstallFromStore">Please uninstall and then install the latest version from Play Store.</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
+
+    <string name="start">Start</string>
+    <string name="enter_water_quantity">Water quantity</string>
+    <string name="litres">Litres</string>
+    <string name="contamination">Contamination</string>
+    <string name="chemical_coagulation">Chemical</string>
+    <string name="treatment_method">Treatment method</string>
+    <string name="test_result">Test result</string>
+    <string name="chromium_vi">Chromium (VI)</string>
+    <string name="mg_l">mg/l</string>
 </resources>
