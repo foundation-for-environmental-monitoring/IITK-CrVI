@@ -1,23 +1,22 @@
 package io.ffem.iitk.ui.main
 
+import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import io.ffem.iitk.R
 import kotlinx.android.synthetic.main.fragment_result_treatment.*
 import org.json.JSONObject
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
+
 
 private const val ARG_RESULT_JSON = "resultJson"
 private const val ARG_TREATMENT_TYPE = "treatmentType"
@@ -31,6 +30,7 @@ private val gramFormat = DecimalFormat("#.###", symbols)
 class ResultTreatmentFragment : Fragment() {
     private lateinit var resultJson: String
     private lateinit var treatmentType: TreatmentType
+    private var expandedPanel = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,23 +61,33 @@ class ResultTreatmentFragment : Fragment() {
             calculateRecommendation(value)
         }
 
-        tabs.addOnTabSelectedListener(object : OnTabSelectedListener {
-            override fun onTabReselected(p0: TabLayout.Tab?) {
-            }
-
-            override fun onTabUnselected(p0: TabLayout.Tab?) {
-            }
-
-            override fun onTabSelected(p0: TabLayout.Tab?) {
-                if (p0!!.position == 0) {
-                    recommendation1Text.visibility = VISIBLE
-                    recommendation2Text.visibility = GONE
+        expansionLayout.addListener { expansionLayout, expanded ->
+            run {
+                if (expanded) {
+                    tv_header1.setTypeface(null, Typeface.BOLD)
+                    tv_header1.setTextColor(Color.WHITE)
+                    header1.setBackgroundColor(Color.GRAY)
                 } else {
-                    recommendation1Text.visibility = GONE
-                    recommendation2Text.visibility = VISIBLE
+                    tv_header1.setTypeface(null, Typeface.NORMAL)
+                    tv_header1.setTextColor(Color.rgb(140, 140, 140))
+                    header1.setBackgroundColor(Color.rgb(250, 250, 250))
                 }
             }
-        })
+        }
+
+        expansionLayout2.addListener { expansionLayout, expanded ->
+            run {
+                if (expanded) {
+                    tv_header2.setTypeface(null, Typeface.BOLD)
+                    tv_header2.setTextColor(Color.WHITE)
+                    header2.setBackgroundColor(Color.GRAY)
+                } else {
+                    tv_header2.setTypeface(null, Typeface.NORMAL)
+                    tv_header2.setTextColor(Color.rgb(140, 140, 140))
+                    header2.setBackgroundColor(Color.rgb(250, 250, 250))
+                }
+            }
+        }
 
         if (treatmentType == TreatmentType.NONE) {
 //            infoLayout.visibility = INVISIBLE
@@ -116,20 +126,20 @@ class ResultTreatmentFragment : Fragment() {
             recommendation2Text.text = Html.fromHtml(
                 getString(R.string.electrocoagulation_recommendation, time, quantity.toInt())
             )
-            labelTreatmentMethod.visibility = VISIBLE
-            tabs.visibility = VISIBLE
-            if (tabs.selectedTabPosition == 0) {
-                recommendation1Text.visibility = VISIBLE
-                recommendation2Text.visibility = GONE
-            } else {
-                recommendation1Text.visibility = GONE
-                recommendation2Text.visibility = VISIBLE
-            }
+//            labelTreatmentMethod.visibility = VISIBLE
+//            tabs.visibility = VISIBLE
+//            if (tabs.selectedTabPosition == 0) {
+//                recommendation1Text.visibility = VISIBLE
+//                recommendation2Text.visibility = GONE
+//            } else {
+//                recommendation1Text.visibility = GONE
+//                recommendation2Text.visibility = VISIBLE
+//            }
         } else {
-            labelTreatmentMethod.visibility = GONE
-            tabs.visibility = GONE
-            recommendation1Text.visibility = GONE
-            recommendation2Text.visibility = GONE
+//            labelTreatmentMethod.visibility = GONE
+//            tabs.visibility = GONE
+//            recommendation1Text.visibility = GONE
+//            recommendation2Text.visibility = GONE
         }
     }
 

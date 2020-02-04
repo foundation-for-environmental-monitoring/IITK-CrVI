@@ -16,9 +16,8 @@
         android:paddingEnd="@dimen/activity_horizontal_margin"
         android:paddingBottom="3dp"
         android:text="@string/test_result"
-        android:textColor="#999"
+        android:textColor="#888"
         android:textSize="14sp"
-        android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
@@ -61,7 +60,6 @@
             android:textSize="17sp" />
     </LinearLayout>
 
-
     <TextView
         android:id="@+id/textTitle"
         android:layout_width="match_parent"
@@ -74,17 +72,15 @@
         android:paddingEnd="@dimen/activity_horizontal_margin"
         android:paddingBottom="3dp"
         android:text="@string/enter_water_quantity"
-        android:textColor="#999"
+        android:textColor="#888"
         android:textSize="14sp"
-        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/resultLayout" />
-
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/editResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="48dp"
         android:imeOptions="actionDone"
         android:includeFontPadding="false"
@@ -95,7 +91,7 @@
         android:paddingStart="2dp"
         android:paddingEnd="10dp"
         android:textAlignment="center"
-        android:textSize="30sp"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textTitle"
@@ -114,69 +110,221 @@
         app:layout_constraintStart_toEndOf="@id/editResult" />
 
     <TextView
-        android:id="@+id/labelTreatmentMethod"
+        android:id="@+id/tv_recommendation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:background="#eee"
         android:paddingStart="@dimen/activity_horizontal_margin"
         android:paddingTop="3dp"
         android:paddingEnd="@dimen/activity_horizontal_margin"
         android:paddingBottom="3dp"
-        android:text="@string/treatment_method"
-        android:textColor="#999"
+        android:text="@string/recommendation"
+        android:textColor="#888"
         android:textSize="14sp"
-        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/editResult" />
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabs"
+    <com.github.florent37.expansionpanel.viewgroup.ExpansionsViewGroupLinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/labelTreatmentMethod">
+        android:orientation="vertical"
+        app:expansion_openOnlyOne="true"
+        app:layout_constraintTop_toBottomOf="@id/tv_recommendation">
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
+        <com.github.florent37.expansionpanel.ExpansionHeader
+            android:id="@+id/header1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/chemical_coagulation" />
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            app:expansion_headerIndicator="@id/headerIndicator"
+            app:expansion_layout="@id/expansionLayout"
+            app:expansion_toggleOnClick="true">
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
+            <!-- HEADER -->
+            <TextView
+                android:id="@+id/tv_header1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp"
+                android:text="@string/chemical_coagulation"
+                android:textSize="15sp"
+                android:textStyle="normal" />
+
+            <!-- HEADER INDICATOR -->
+            <ImageView
+                android:id="@+id/headerIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:layout_marginStart="16dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@null"
+                app:srcCompat="@drawable/ic_expansion_header_indicator_grey_24dp" />
+
+        </com.github.florent37.expansionpanel.ExpansionHeader>
+
+        <com.github.florent37.expansionpanel.ExpansionLayout
+            android:id="@+id/expansionLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- CONTENT -->
+            <TextView
+                android:id="@+id/recommendation1Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="#fff"
+                android:lineSpacingExtra="5dp"
+                android:paddingStart="16dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="12dp"
+                android:textAlignment="textStart"
+                android:textColor="#666"
+                android:textSize="16sp"
+                tools:text="@string/iron_sulphate_recommendation" />
+
+        </com.github.florent37.expansionpanel.ExpansionLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ddd" />
+
+        <com.github.florent37.expansionpanel.ExpansionHeader
+            android:id="@+id/header2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/electrocoagulation" />
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            app:expansion_headerIndicator="@id/headerIndicator2"
+            app:expansion_layout="@id/expansionLayout2"
+            app:expansion_toggleOnClick="true">
 
-    </com.google.android.material.tabs.TabLayout>
+            <!-- HEADER -->
+            <TextView
+                android:id="@+id/tv_header2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp"
+                android:text="@string/electrocoagulation"
+                android:textSize="16sp"
+                android:textStyle="normal" />
 
-    <TextView
-        android:id="@+id/recommendation1Text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="25dp"
-        android:lineSpacingExtra="5dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:textAlignment="textStart"
-        android:textColor="#666"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/tabs"
-        tools:text="@string/iron_sulphate_recommendation" />
+            <!-- HEADER INDICATOR -->
+            <ImageView
+                android:id="@+id/headerIndicator2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:layout_marginStart="16dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@null"
+                app:srcCompat="@drawable/ic_expansion_header_indicator_grey_24dp" />
 
-    <TextView
-        android:id="@+id/recommendation2Text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="25dp"
-        android:lineSpacingExtra="5dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:textAlignment="textStart"
-        android:textColor="#666"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/recommendation1Text"
-        tools:text="@string/electrocoagulation_recommendation" />
 
+        </com.github.florent37.expansionpanel.ExpansionHeader>
+
+        <com.github.florent37.expansionpanel.ExpansionLayout
+            android:id="@+id/expansionLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- CONTENT -->
+            <TextView
+                android:id="@+id/recommendation2Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="#fff"
+                android:lineSpacingExtra="5dp"
+                android:paddingStart="16dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="12dp"
+                android:textAlignment="textStart"
+                android:textColor="#666"
+                android:textSize="16sp"
+                tools:text="@string/electrocoagulation_recommendation" />
+
+        </com.github.florent37.expansionpanel.ExpansionLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ddd" />
+
+    </com.github.florent37.expansionpanel.viewgroup.ExpansionsViewGroupLinearLayout>
+
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/exp_chemical"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:orientation="vertical"-->
+    <!--        >-->
+
+    <!--       -->
+    <!--    </LinearLayout>-->
+
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/exp_electro"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:orientation="vertical"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/exp_chemical">-->
+
+    <!--        -->
+    <!--    </LinearLayout>-->
+
+    <!--    <com.robertlevonyan.views.expandable.Expandable-->
+    <!--        android:id="@+id/exp_chemical"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:exp_animateExpand="true"-->
+    <!--        app:exp_backgroundColor="#ddd"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/tv_recommendation">-->
+
+
+    <!--    </com.robertlevonyan.views.expandable.Expandable>-->
+
+    <!--    <com.robertlevonyan.views.expandable.Expandable-->
+    <!--        android:id="@+id/exp_electro"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:exp_animateExpand="true"-->
+    <!--        app:exp_backgroundColor="#eee"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/exp_chemical">-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/header"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_gravity="center_vertical"-->
+    <!--            android:layout_marginStart="16dp"-->
+    <!--            android:text="@string/electrocoagulation"-->
+    <!--            android:textSize="16sp"-->
+    <!--            android:textStyle="bold" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/recommendation2Text"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginTop="2dp"-->
+    <!--            android:background="#fff"-->
+    <!--            android:lineSpacingExtra="5dp"-->
+    <!--            android:paddingStart="16dp"-->
+    <!--            android:paddingTop="12dp"-->
+    <!--            android:paddingEnd="16dp"-->
+    <!--            android:paddingBottom="10dp"-->
+    <!--            android:textAlignment="textStart"-->
+    <!--            android:textColor="#666"-->
+    <!--            android:textSize="16sp"-->
+    <!--            tools:text="@string/electrocoagulation_recommendation" />-->
+    <!--    </com.robertlevonyan.views.expandable.Expandable>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

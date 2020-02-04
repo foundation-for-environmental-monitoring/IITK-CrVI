@@ -26,9 +26,10 @@
     <string name="enter_water_quantity">Water quantity</string>
     <string name="litres">Litres</string>
     <string name="contamination">Contamination</string>
-    <string name="chemical_coagulation">Chemical</string>
-    <string name="treatment_method">Treatment method</string>
+    <string name="chemical_coagulation">Chemical coagulation</string>
+    <string name="treatment_method">Select a treatment method</string>
     <string name="test_result">Test result</string>
     <string name="chromium_vi">Chromium (VI)</string>
     <string name="mg_l">mg/l</string>
+    <string name="recommendation">Recommendation</string>
 </resources>
