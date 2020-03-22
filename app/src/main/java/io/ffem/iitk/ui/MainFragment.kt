@@ -1,4 +1,4 @@
-package io.ffem.iitk.ui.main
+package io.ffem.iitk.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater

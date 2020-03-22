@@ -4,7 +4,6 @@ package io.ffem.iitk
 import android.os.SystemClock
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -107,24 +106,6 @@ class OutputWaterTest {
             )
         )
         textView2.check(matches(withText("Chromium")))
-
-        val textView3 = onView(
-            allOf(
-                withId(R.id.textSubtitle),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.resultLayout),
-                        childAtPosition(
-                            IsInstanceOf.instanceOf(android.widget.RelativeLayout::class.java),
-                            0
-                        )
-                    ),
-                    1
-                ),
-                isDisplayed()
-            )
-        )
-        textView3.check(doesNotExist())
 
         onView(
             allOf(

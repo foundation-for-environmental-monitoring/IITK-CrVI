@@ -6,7 +6,6 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
@@ -14,12 +13,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentManager
-import io.ffem.iitk.ui.main.ItemFragment
-import io.ffem.iitk.ui.main.MainFragment
-import io.ffem.iitk.ui.main.ResultTreatmentFragment
-import io.ffem.iitk.ui.main.TreatmentType
-import io.ffem.iitk.ui.main.helper.ApkHelper
-import io.ffem.iitk.ui.main.model.Treatments
+import io.ffem.iitk.helper.ApkHelper
+import io.ffem.iitk.ui.MainFragment
+import io.ffem.iitk.ui.ResultTreatmentFragment
+import io.ffem.iitk.ui.TreatmentType
 import org.json.JSONException
 import java.util.*
 
@@ -29,7 +26,7 @@ const val EXTERNAL_REQUEST = 1
 const val TREATMENT_TYPE = "treatmentType"
 const val PLAY_STORE_URL = "https://play.google.com/store/apps/details?id="
 
-class MainActivity : AppCompatActivity(), ItemFragment.OnListFragmentInteractionListener {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var treatmentType: TreatmentType
 
@@ -139,10 +136,6 @@ class MainActivity : AppCompatActivity(), ItemFragment.OnListFragmentInteraction
 
     fun inputWaterButtonClick(@Suppress("UNUSED_PARAMETER") view: View) {
         launchTest(TreatmentType.ELECTROCOAGULATION)
-//        supportFragmentManager.beginTransaction()
-//            .replace(R.id.container, InputFragment.newInstance("0","0"))
-//            .addToBackStack(null)
-//            .commit()
     }
 
     fun outputWaterButtonClick(@Suppress("UNUSED_PARAMETER") view: View) {
@@ -155,17 +148,5 @@ class MainActivity : AppCompatActivity(), ItemFragment.OnListFragmentInteraction
             return true
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    override fun onListFragmentInteraction(item: Treatments.TreatmentItem?) {
-        Handler().postDelayed(
-            {
-                launchTest(item!!.treatmentType)
-            }, 350
-        )
-    }
-
-    fun startButtonClick(@Suppress("UNUSED_PARAMETER") view: View) {
-        launchTest(TreatmentType.ELECTROCOAGULATION)
     }
 }

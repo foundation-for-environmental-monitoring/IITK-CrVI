@@ -2,16 +2,13 @@
     <string name="app_name">IITK-CrVI</string>
 
     <string name="select_water_type">Select water type</string>
-    <string name="select_treatment_type">Select treatment type</string>
 
     <string name="app_not_found">App not found</string>
     <string name="install_app">%s app is required to launch the test.\n\nYou can install the app from Play store.</string>
     <string name="go_to_play_store">Go to Play store</string>
 
-    <string name="result">Result</string>
     <string name="input_water">Input Water</string>
     <string name="output_water">Output Water</string>
-    <string name="iron_sulphate">Iron Sulphate</string>
     <string name="electrocoagulation">Electrocoagulation</string>
     <string name="treatment">Treatment</string>
     <string name="electrocoagulation_recommendation"><![CDATA[Allow treatment time of <b>%s</b> with 40 mA of current for  <b>%d L</b> of water]]></string>
@@ -22,14 +19,10 @@
     <string name="uninstallAndInstallFromStore">Please uninstall and then install the latest version from Play Store.</string>
     <string name="ok">OK</string>
 
-    <string name="start">Start</string>
     <string name="enter_water_quantity">Water quantity</string>
     <string name="litres">Litres</string>
-    <string name="contamination">Contamination</string>
     <string name="chemical_coagulation">Chemical coagulation</string>
-    <string name="treatment_method">Select a treatment method</string>
-    <string name="test_result">Test result</string>
+    <string name="test_result">Result</string>
     <string name="chromium_vi">Chromium (VI)</string>
     <string name="mg_l">mg/l</string>
-    <string name="recommendation">Recommendation</string>
 </resources>

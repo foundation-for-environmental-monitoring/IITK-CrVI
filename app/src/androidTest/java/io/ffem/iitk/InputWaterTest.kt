@@ -4,7 +4,6 @@ package io.ffem.iitk
 import android.os.SystemClock
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -58,46 +57,11 @@ class InputWaterTest {
         )
         appCompatButton.perform(click())
 
-        val linearLayout = onView(
-            allOf(
-                childAtPosition(
-                    allOf(
-                        withId(R.id.list),
-                        childAtPosition(
-                            withId(R.id.container),
-                            0
-                        )
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        linearLayout.perform(click())
-
         SystemClock.sleep(1000)
 
         mDevice.findObject(By.text("Next")).click()
 
         SystemClock.sleep(4000)
-
-        val textView = onView(
-            allOf(
-                withText("Treatment"),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.infoLayout),
-                        childAtPosition(
-                            IsInstanceOf.instanceOf(android.widget.RelativeLayout::class.java),
-                            1
-                        )
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        textView.check(matches(withText("Treatment")))
 
         val textView2 = onView(
             allOf(
@@ -116,62 +80,6 @@ class InputWaterTest {
             )
         )
         textView2.check(matches(withText("Chromium")))
-
-        val textView3 = onView(
-            allOf(
-                withId(R.id.textSubtitle), withText("Iron Sulphate"),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.resultLayout),
-                        childAtPosition(
-                            IsInstanceOf.instanceOf(android.widget.RelativeLayout::class.java),
-                            0
-                        )
-                    ),
-                    1
-                ),
-                isDisplayed()
-            )
-        )
-        textView3.check(matches(withText("Iron Sulphate")))
-
-        val textView4 = onView(
-            allOf(
-                withId(R.id.recommendation2Text),
-                withText("Note: Based on each tablet containing 200mg of FeSO4.7H2O salt."),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.infoLayout),
-                        childAtPosition(
-                            IsInstanceOf.instanceOf(android.widget.RelativeLayout::class.java),
-                            1
-                        )
-                    ),
-                    2
-                ),
-                isDisplayed()
-            )
-        )
-        textView4.check(matches(withText("Note: Based on each tablet containing 200mg of FeSO4.7H2O salt.")))
-
-        val textView5 = onView(
-            allOf(
-                withId(R.id.recommendation1Text),
-                withText(R.string.iron_sulphate_recommendation),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.infoLayout),
-                        childAtPosition(
-                            IsInstanceOf.instanceOf(android.widget.RelativeLayout::class.java),
-                            1
-                        )
-                    ),
-                    1
-                ),
-                isDisplayed()
-            )
-        )
-        textView5.check(matches(withText(R.string.iron_sulphate_recommendation)))
 
         val textView6 = onView(
             allOf(
@@ -208,23 +116,6 @@ class InputWaterTest {
             )
         )
         appCompatButton.perform(click())
-
-        val linearLayout = onView(
-            allOf(
-                childAtPosition(
-                    allOf(
-                        withId(R.id.list),
-                        childAtPosition(
-                            withId(R.id.container),
-                            0
-                        )
-                    ),
-                    1
-                ),
-                isDisplayed()
-            )
-        )
-        linearLayout.perform(click())
 
         SystemClock.sleep(1000)
 
@@ -267,78 +158,5 @@ class InputWaterTest {
             )
         )
         textView2.check(matches(withText("Chromium")))
-
-        val textView3 = onView(
-            allOf(
-                withId(R.id.textSubtitle), withText("Electrocoagulation"),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.resultLayout),
-                        childAtPosition(
-                            IsInstanceOf.instanceOf(android.widget.RelativeLayout::class.java),
-                            0
-                        )
-                    ),
-                    1
-                ),
-                isDisplayed()
-            )
-        )
-        textView3.check(matches(withText("Electrocoagulation")))
-
-        val textView4 = onView(
-            allOf(
-                withText("Treatment"),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.infoLayout),
-                        childAtPosition(
-                            IsInstanceOf.instanceOf(android.widget.RelativeLayout::class.java),
-                            1
-                        )
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        textView4.check(matches(withText("Treatment")))
-
-        val textView5 = onView(
-            allOf(
-                withId(R.id.recommendation1Text),
-                withText(R.string.electrocoagulation_recommendation),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.infoLayout),
-                        childAtPosition(
-                            IsInstanceOf.instanceOf(android.widget.RelativeLayout::class.java),
-                            1
-                        )
-                    ),
-                    1
-                ),
-                isDisplayed()
-            )
-        )
-        textView5.check(matches(withText(R.string.electrocoagulation_recommendation)))
-
-        val textView6 = onView(
-            allOf(
-                withId(R.id.recommendation2Text),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.infoLayout),
-                        childAtPosition(
-                            IsInstanceOf.instanceOf(android.widget.RelativeLayout::class.java),
-                            1
-                        )
-                    ),
-                    2
-                ),
-                isDisplayed()
-            )
-        )
-        textView6.check(doesNotExist())
     }
 }

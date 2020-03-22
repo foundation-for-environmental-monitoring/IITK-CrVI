@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InputFragment">
+    tools:context="ui.InputDialogFragment">
 
     <TextView
         android:id="@+id/textTitle"
@@ -15,27 +15,32 @@
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:gravity="center_horizontal"
         android:text="@string/enter_water_quantity"
+        android:textColor="#333"
+        android:textSize="22sp"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/editResult"
-        android:layout_width="100dp"
+        android:id="@+id/quantity_edit"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="48dp"
         android:layout_marginBottom="16dp"
+        android:focusedByDefault="true"
         android:includeFontPadding="false"
         android:inputType="numberDecimal"
         android:maxLength="9"
+        android:minWidth="80dp"
         android:paddingStart="2dp"
         android:paddingEnd="10dp"
-        android:textAlignment="textEnd"
+        android:textAlignment="center"
         android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textTitle"
-        tools:text="22.3" />
+        tools:ignore="UnusedAttribute"
+        tools:text="1092.30" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -47,23 +52,7 @@
         android:textColor="#3d3d3d"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/editResult"
-        app:layout_constraintStart_toEndOf="@id/editResult" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="32dp"
-        android:minWidth="180dp"
-        android:onClick="startButtonClick"
-        android:padding="16dp"
-        android:text="@string/start"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editResult" />
-
+        app:layout_constraintBottom_toBottomOf="@id/quantity_edit"
+        app:layout_constraintStart_toEndOf="@id/quantity_edit" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

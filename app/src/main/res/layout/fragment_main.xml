@@ -6,7 +6,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:paddingBottom="100dp"
-    tools:context=".ui.main.MainFragment">
+    tools:context=".ui.MainFragment">
 
     <Button
         android:layout_width="wrap_content"

@@ -1,7 +1,6 @@
-package io.ffem.iitk.ui.main;
+package io.ffem.iitk.ui;
 
 public enum TreatmentType {
-    IRON_SULPHATE,
     ELECTROCOAGULATION,
     NONE
 }
