@@ -6,6 +6,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
@@ -14,9 +15,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentManager
 import io.ffem.iitk.helper.ApkHelper
-import io.ffem.iitk.ui.MainFragment
-import io.ffem.iitk.ui.ResultTreatmentFragment
-import io.ffem.iitk.ui.TreatmentType
+import io.ffem.iitk.ui.*
+import kotlinx.android.synthetic.main.app_bar_layout.*
 import org.json.JSONException
 import java.util.*
 
@@ -26,9 +26,11 @@ const val EXTERNAL_REQUEST = 1
 const val TREATMENT_TYPE = "treatmentType"
 const val PLAY_STORE_URL = "https://play.google.com/store/apps/details?id="
 
+const val ARG_RESULT_JSON = "resultJson"
+
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var treatmentType: TreatmentType
+    private lateinit var waterType: WaterType
 
     override fun setTitle(titleId: Int) {
         super.setTitle(titleId)
@@ -38,6 +40,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        if (toolbar != null) {
+            try {
+                setSupportActionBar(toolbar)
+            } catch (ignored: Exception) {
+                // do nothing
+            }
+        }
+
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, MainFragment.newInstance())
@@ -67,17 +78,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun launchTest(type: TreatmentType) {
+    private fun launchTest(type: WaterType) {
         val appTitle = "ffem Water"
         val externalAppAction = "io.ffem.water"
         val testId = "d488672f-9a4c-4aa4-82eb-8a95c40d0296"
-        treatmentType = type
+        waterType = type
 
         val data = Bundle()
         try {
             data.putString(TEST_ID_KEY, testId)
             data.putBoolean("debugMode", true)
-            data.putString(TREATMENT_TYPE, treatmentType.toString())
+            data.putString(TREATMENT_TYPE, waterType.toString())
             val intent = Intent(externalAppAction)
             intent.putExtras(data)
             startActivityForResult(intent, EXTERNAL_REQUEST)
@@ -120,12 +131,22 @@ class MainActivity : AppCompatActivity() {
                         null,
                         FragmentManager.POP_BACK_STACK_INCLUSIVE
                     )
-                    supportFragmentManager.beginTransaction()
-                        .replace(
-                            R.id.container,
-                            ResultTreatmentFragment.newInstance(jsonString, treatmentType)
-                        )
-                        .commitNow()
+
+                    if (waterType == WaterType.INPUT) {
+                        supportFragmentManager.beginTransaction()
+                            .replace(
+                                R.id.container,
+                                ResultTreatmentFragment.newInstance(jsonString)
+                            )
+                            .commitNow()
+                    } else {
+                        supportFragmentManager.beginTransaction()
+                            .replace(
+                                R.id.container,
+                                ResultFragment.newInstance(jsonString)
+                            )
+                            .commitNow()
+                    }
 
                 }
             } catch (e: JSONException) {
@@ -135,11 +156,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun inputWaterButtonClick(@Suppress("UNUSED_PARAMETER") view: View) {
-        launchTest(TreatmentType.ELECTROCOAGULATION)
+        launchTest(WaterType.INPUT)
     }
 
     fun outputWaterButtonClick(@Suppress("UNUSED_PARAMETER") view: View) {
-        launchTest(TreatmentType.NONE)
+        launchTest(WaterType.OUTPUT)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -147,6 +173,12 @@ class MainActivity : AppCompatActivity() {
             onBackPressed()
             return true
         }
+
         return super.onOptionsItemSelected(item)
+    }
+
+    fun onInfoClick(@Suppress("UNUSED_PARAMETER") item: MenuItem) {
+        val intent = Intent(this, AboutActivity::class.java)
+        startActivity(intent)
     }
 }

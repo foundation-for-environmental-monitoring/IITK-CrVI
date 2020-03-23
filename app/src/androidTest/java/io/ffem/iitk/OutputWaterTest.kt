@@ -109,7 +109,7 @@ class OutputWaterTest {
 
         onView(
             allOf(
-                withId(R.id.textResult),
+                withId(R.id.text_result),
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.resultLayout),

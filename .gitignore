@@ -12,3 +12,9 @@
 /captures
 .externalNativeBuild
 .cxx
+
+# IntelliJ
+.idea/**
+!.idea
+!.idea/dictionaries/
+!.idea/dictionaries/common.xml

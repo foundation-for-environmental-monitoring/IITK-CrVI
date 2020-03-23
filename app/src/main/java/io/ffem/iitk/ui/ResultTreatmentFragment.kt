@@ -9,16 +9,13 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
+import io.ffem.iitk.ARG_RESULT_JSON
 import io.ffem.iitk.R
 import kotlinx.android.synthetic.main.fragment_result_treatment.*
 import org.json.JSONObject
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
-
-
-private const val ARG_RESULT_JSON = "resultJson"
-private const val ARG_TREATMENT_TYPE = "treatmentType"
 
 @Transient
 private val symbols = DecimalFormatSymbols(Locale.US)
@@ -33,17 +30,11 @@ class ResultTreatmentFragment : Fragment(), InputDialogFragment.InputDialogListe
     private var quantity: Double = 1.0
     private var resultValue: String = ""
     private lateinit var resultJson: String
-    private lateinit var treatmentType: TreatmentType
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             resultJson = it.getString(ARG_RESULT_JSON).toString()
-            treatmentType = TreatmentType.valueOf(
-                it.getString(
-                    ARG_TREATMENT_TYPE
-                ).toString()
-            )
         }
     }
 
@@ -62,15 +53,10 @@ class ResultTreatmentFragment : Fragment(), InputDialogFragment.InputDialogListe
             (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
         }
 
-        textResult.text = resultValue
-        textName.text = "$name (VI)"
+        text_result.text = resultValue
+        text_name.text = "$name (VI)"
 
-        if (treatmentType == TreatmentType.NONE) {
-//            infoLayout.visibility = INVISIBLE
-        } else {
-            calculateRecommendation()
-        }
-
+        calculateRecommendation()
         water_quantity_btn.setOnClickListener { showInputDialog() }
     }
 
@@ -118,11 +104,10 @@ class ResultTreatmentFragment : Fragment(), InputDialogFragment.InputDialogListe
 
     companion object {
         @JvmStatic
-        fun newInstance(resultJson: String, treatmentType: TreatmentType) =
+        fun newInstance(resultJson: String) =
             ResultTreatmentFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_RESULT_JSON, resultJson)
-                    putString(ARG_TREATMENT_TYPE, treatmentType.toString())
                 }
             }
     }

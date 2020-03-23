@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Software Notices-->
+    <string name="apache_software"><a href="https://github.com/joel-costigliola/assertj-core">AssertJ</a>&#160;&#160;&#8226;&#160;&#160;<a href="https://github.com/JakeWharton/timber">Timber</a>&#160;&#160;&#8226;&#160;&#160;<a href="https://source.android.com/setup/licenses">AOSP</a></string>
+    <string name="mit_software"><a href="http://robolectric.org/">Robolectric</a></string>
+    <string name="cca_software"><a href="https://design.google.com/icons/">Material Icons</a></string>
+    <string name="eclipse_software"><a href="https://github.com/junit-team/junit4">Junit 4</a></string>
+
+</resources>
