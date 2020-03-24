@@ -28,7 +28,7 @@ object ApkHelper {
             )
             val appExpiryDate = GregorianCalendar.getInstance()
             appExpiryDate.time = BuildConfig.BUILD_TIME
-            appExpiryDate.add(Calendar.DAY_OF_YEAR, 7)
+            appExpiryDate.add(Calendar.DAY_OF_YEAR, 15)
             if (GregorianCalendar().after(appExpiryDate)) {
                 val message = String.format(
                     "%s%n%n%s", activity.getString(R.string.thisVersionHasExpired),

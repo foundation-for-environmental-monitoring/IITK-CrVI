@@ -21,7 +21,6 @@
     <string name="input_water">Input Water</string>
     <string name="output_water">Output Water</string>
     <string name="electrocoagulation">Electrocoagulation</string>
-    <string name="treatment">Treatment</string>
     <string name="electrocoagulation_recommendation"><![CDATA[Allow treatment time of <b>%s</b> with 40 mA of current for  <b>%d L</b> of water]]></string>
     <string name="iron_sulphate_recommendation"><![CDATA[Add <b>%s</b> of FeSO4 salt to <b>%d L</b> of water]]></string>
 
@@ -33,10 +32,10 @@
     <string name="enter_water_quantity">Water quantity</string>
     <string name="litres">Litres</string>
     <string name="chemical_coagulation">Chemical coagulation</string>
-    <string name="test_result">Result</string>
-    <string name="chromium_vi">Chromium (VI)</string>
     <string name="mg_l">mg/l</string>
     <string name="navigate_up">Navigate up</string>
     <string name="info">Info</string>
     <string name="result">Result</string>
+    <string name="safe">Safe</string>
+    <string name="unsafe">Unsafe</string>
 </resources>

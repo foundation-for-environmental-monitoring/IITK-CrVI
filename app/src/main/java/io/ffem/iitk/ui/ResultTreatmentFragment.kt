@@ -3,6 +3,9 @@ package io.ffem.iitk.ui
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Html
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.SubscriptSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,7 +51,7 @@ class ResultTreatmentFragment : Fragment(), InputDialogFragment.InputDialogListe
         resultValue = value.replace("> >", ">")
         val name = result.getJSONObject(0).getString("name")
 
-        activity?.setTitle(R.string.treatment)
+        activity?.setTitle(R.string.result)
         if ((activity as AppCompatActivity).supportActionBar != null) {
             (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
         }
@@ -71,9 +74,17 @@ class ResultTreatmentFragment : Fragment(), InputDialogFragment.InputDialogListe
             amount = "${gramFormat.format(chemicalQty)} gm"
         }
 
-        recommendation1Text.text = Html.fromHtml(
-            getString(R.string.iron_sulphate_recommendation, amount, quantity.toInt())
+        val string = SpannableString(
+            Html.fromHtml(
+                getString(R.string.iron_sulphate_recommendation, amount, quantity.toInt())
+            )
         )
+        string.setSpan(
+            SubscriptSpan(), string.indexOf("FeSO4") + 4,
+            string.indexOf("FeSO4") + 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        recommendation1Text.text = string
 
         val totalMinutes = (totalContamination * 120 / 12).toInt()
         val hours: Int = totalMinutes / 60
