@@ -4,12 +4,16 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import io.ffem.iitk.ARG_RESULT_JSON
 import io.ffem.iitk.R
-import kotlinx.android.synthetic.main.fragment_result_treatment.*
+import kotlinx.android.synthetic.main.fragment_result.*
+import kotlinx.android.synthetic.main.fragment_result_treatment.text_name
+import kotlinx.android.synthetic.main.fragment_result_treatment.text_result
 import org.json.JSONObject
 
 class ResultFragment : Fragment() {
@@ -47,15 +51,15 @@ class ResultFragment : Fragment() {
 
         text_result.text = resultValue
         text_name.text = "$name (VI)"
-    }
 
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        val testInfo = ResultFragmentArgs.fromBundle(arguments!!).testInfo
-//        text_title.text = testInfo.name
-//        text_result.text = testInfo.result
-//        text_unit.text = testInfo.unit
-//        super.onViewCreated(view, savedInstanceState)
-//    }
+        if (resultValue.toDouble() < 0.1) {
+            lyt_safe_message.visibility = VISIBLE
+            lyt_unsafe_message.visibility = GONE
+        } else {
+            lyt_safe_message.visibility = GONE
+            lyt_unsafe_message.visibility = VISIBLE
+        }
+    }
 
     companion object {
         @JvmStatic

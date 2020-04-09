@@ -38,4 +38,8 @@
     <string name="result">Result</string>
     <string name="safe">Safe</string>
     <string name="unsafe">Unsafe</string>
+    <string name="low_risk">Low Risk</string>
+    <string name="chromium_vi_content_is_low">Chromium (VI) content is below the maximum contaminant level for drinking water.</string>
+    <string name="standard_by_epa">Standard by Environmental Protection Agency (EPA)</string>
+    <string name="water_should_be_treated">Water should be treated before drinking.</string>
 </resources>
