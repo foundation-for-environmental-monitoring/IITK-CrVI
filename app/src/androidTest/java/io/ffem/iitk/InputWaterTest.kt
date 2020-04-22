@@ -6,10 +6,10 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.rule.ActivityTestRule
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import io.ffem.iitk.util.TestHelper
@@ -26,9 +26,8 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class InputWaterTest {
 
-    @Rule
-    @JvmField
-    var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
+    @get:Rule
+    val mActivityTestRule = activityScenarioRule<MainActivity>()
 
     companion object {
         @JvmStatic
@@ -57,7 +56,7 @@ class InputWaterTest {
         )
         appCompatButton.perform(click())
 
-        SystemClock.sleep(1000)
+        SystemClock.sleep(2000)
 
         mDevice.findObject(By.text("Next")).click()
 
@@ -65,21 +64,11 @@ class InputWaterTest {
 
         val textView2 = onView(
             allOf(
-                withId(R.id.textTitle), withText("Chromium"),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.resultLayout),
-                        childAtPosition(
-                            IsInstanceOf.instanceOf(android.widget.RelativeLayout::class.java),
-                            0
-                        )
-                    ),
-                    0
-                ),
+                withId(R.id.text_name), withText("Chromium (VI)"),
                 isDisplayed()
             )
         )
-        textView2.check(matches(withText("Chromium")))
+        textView2.check(matches(withText("Chromium (VI)")))
 
         val textView6 = onView(
             allOf(
@@ -117,7 +106,7 @@ class InputWaterTest {
         )
         appCompatButton.perform(click())
 
-        SystemClock.sleep(1000)
+        SystemClock.sleep(2000)
 
         mDevice.findObject(By.text("Next")).click()
 
@@ -143,20 +132,10 @@ class InputWaterTest {
 
         val textView2 = onView(
             allOf(
-                withId(R.id.textTitle), withText("Chromium"),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.resultLayout),
-                        childAtPosition(
-                            IsInstanceOf.instanceOf(android.widget.RelativeLayout::class.java),
-                            0
-                        )
-                    ),
-                    0
-                ),
+                withId(R.id.text_name), withText("Chromium (VI)"),
                 isDisplayed()
             )
         )
-        textView2.check(matches(withText("Chromium")))
+        textView2.check(matches(withText("Chromium (VI)")))
     }
 }

@@ -11,7 +11,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentManager
 import io.ffem.iitk.helper.ApkHelper
@@ -28,7 +27,7 @@ const val PLAY_STORE_URL = "https://play.google.com/store/apps/details?id="
 
 const val ARG_RESULT_JSON = "resultJson"
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppUpdateActivity() {
 
     private lateinit var waterType: WaterType
 
