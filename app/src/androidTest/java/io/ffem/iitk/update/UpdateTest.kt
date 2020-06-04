@@ -11,7 +11,6 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.testing.FakeAppUpdateManager
-import com.google.android.play.core.install.model.AppUpdateType
 import io.ffem.iitk.BuildConfig
 import io.ffem.iitk.MainActivity
 import io.ffem.iitk.update.di.TestInjector
@@ -50,7 +49,6 @@ class UpdateTest {
 
     @Test
     fun app_Update_Completes() {
-        fakeAppUpdateManager.partiallyAllowedUpdateType = AppUpdateType.FLEXIBLE
         fakeAppUpdateManager.setUpdateAvailable(BuildConfig.VERSION_CODE + 1)
 
         ActivityScenario.launch(MainActivity::class.java)
@@ -81,7 +79,6 @@ class UpdateTest {
 
     @Test
     fun app_Update_DownloadFails() {
-        fakeAppUpdateManager.partiallyAllowedUpdateType = AppUpdateType.FLEXIBLE
         fakeAppUpdateManager.setUpdateAvailable(BuildConfig.VERSION_CODE + 1)
 
         ActivityScenario.launch(MainActivity::class.java)
