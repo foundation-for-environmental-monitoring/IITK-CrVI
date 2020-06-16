@@ -12,7 +12,6 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.FragmentManager
 import io.ffem.iitk.helper.ApkHelper
 import io.ffem.iitk.ui.*
 import kotlinx.android.synthetic.main.app_bar_layout.*
@@ -86,7 +85,6 @@ class MainActivity : AppUpdateActivity() {
         val data = Bundle()
         try {
             data.putString(TEST_ID_KEY, testId)
-            data.putBoolean("debugMode", true)
             data.putString(TREATMENT_TYPE, waterType.toString())
             val intent = Intent(externalAppAction)
             intent.putExtras(data)
@@ -126,10 +124,7 @@ class MainActivity : AppUpdateActivity() {
             val jsonString = intent.getStringExtra(RESULT_JSON)
             try {
                 if (jsonString != null) {
-                    supportFragmentManager.popBackStackImmediate(
-                        null,
-                        FragmentManager.POP_BACK_STACK_INCLUSIVE
-                    )
+                    supportFragmentManager.popBackStackImmediate()
 
                     if (waterType == WaterType.INPUT) {
                         supportFragmentManager.beginTransaction()
@@ -137,14 +132,16 @@ class MainActivity : AppUpdateActivity() {
                                 R.id.container,
                                 ResultTreatmentFragment.newInstance(jsonString)
                             )
-                            .commitNow()
+                            .addToBackStack(null)
+                            .commit()
                     } else {
                         supportFragmentManager.beginTransaction()
                             .replace(
                                 R.id.container,
                                 ResultFragment.newInstance(jsonString)
                             )
-                            .commitNow()
+                            .addToBackStack(null)
+                            .commit()
                     }
 
                 }

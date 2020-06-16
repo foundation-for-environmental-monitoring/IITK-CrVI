@@ -56,7 +56,7 @@ class InputWaterTest {
         )
         appCompatButton.perform(click())
 
-        SystemClock.sleep(2000)
+        SystemClock.sleep(3000)
 
         mDevice.findObject(By.text("Next")).click()
 
