@@ -6,7 +6,6 @@ import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
-import com.google.android.play.core.tasks.OnSuccessListener
 import dagger.android.AndroidInjection
 import java.util.concurrent.Executor
 import javax.inject.Inject
@@ -35,7 +34,7 @@ abstract class AppUpdateActivity : AppCompatActivity() {
     private fun checkInAppUpdate() {
         appUpdateManager
             .appUpdateInfo
-            .addOnSuccessListener(playServiceExecutor, OnSuccessListener { appUpdateInfo ->
+            .addOnSuccessListener(playServiceExecutor, { appUpdateInfo ->
                 when (appUpdateInfo.updateAvailability()) {
                     UpdateAvailability.UPDATE_AVAILABLE -> when {
                         appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE) -> startImmediateUpdate(

@@ -1,6 +1,5 @@
-package io.ffem.iitk.ui;
+package io.ffem.iitk.ui
 
-public enum WaterType {
-    INPUT,
-    OUTPUT
+enum class WaterType {
+    INPUT, OUTPUT
 }

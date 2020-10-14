@@ -41,10 +41,4 @@
     <string name="chromium_vi_content_is_low">Chromium (VI) content is below the maximum contaminant level for drinking water.</string>
     <string name="standard_by_epa">Standard by Environmental Protection Agency (EPA)</string>
     <string name="water_should_be_treated">Water should be treated before drinking.</string>
-
-    <!--App Update-->
-    <string name="update_ready">Update is ready to install</string>
-    <string name="update_download_fail">Unable to download update</string>
-    <string name="restart">Restart</string>
-    <string name="retry">Retry</string>
 </resources>
